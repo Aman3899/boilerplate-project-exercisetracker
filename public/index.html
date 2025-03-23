@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Tracker</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Exercise Tracker</h1>
+
+        <section>
+            <h2>Create a New User</h2>
+            <form id="userForm" action="/api/users" method="POST">
+                <input type="text" name="username" placeholder="Username" required />
+                <button type="submit">Create User</button>
+            </form>
+            <pre id="userOutput"></pre>
+        </section>
+
+        <section>
+            <h2>Add an Exercise</h2>
+            <form id="exerciseForm" action="" method="POST">
+                <input type="text" name="_id" placeholder="User ID" required />
+                <input type="text" name="description" placeholder="Description" required />
+                <input type="number" name="duration" placeholder="Duration (minutes)" required />
+                <input type="date" name="date" placeholder="Date (yyyy-mm-dd)" />
+                <button type="submit">Add Exercise</button>
+            </form>
+            <pre id="exerciseOutput"></pre>
+        </section>
+
+        <section>
+            <h2>Get User Logs</h2>
+            <form id="logForm" action="" method="GET">
+                <input type="text" name="_id" placeholder="User ID" required />
+                <input type="date" name="from" placeholder="From (yyyy-mm-dd)" />
+                <input type="date" name="to" placeholder="To (yyyy-mm-dd)" />
+                <input type="number" name="limit" placeholder="Limit" />
+                <button type="submit">Get Logs</button>
+            </form>
+            <pre id="logOutput"></pre>
+        </section>
+
+        <h2>Example Responses</h2>
+        <p>User: <pre>{"username": "fcc_test", "_id": "12345"}</pre></p>
+        <p>Exercise: <pre>{"username": "fcc_test", "description": "test", "duration": 60, "date": "Mon Jan 01 1990", "_id": "12345"}</pre></p>
+        <p>Log: <pre>{"username": "fcc_test", "count": 1, "_id": "12345", "log": [{"description": "test", "duration": 60, "date": "Mon Jan 01 1990"}]}</pre></p>
+    </div>
+
+    <script>
+        // User form
+        document.getElementById("userForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch("/api/users", { method: "POST", body: formData });
+            const data = await response.json();
+            document.getElementById("userOutput").textContent = JSON.stringify(data, null, 2);
+        });
+
+        // Exercise form
+        document.getElementById("exerciseForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const _id = formData.get("_id");
+            const response = await fetch(`/api/users/${_id}/exercises`, { method: "POST", body: formData });
+            const data = await response.json();
+            document.getElementById("exerciseOutput").textContent = JSON.stringify(data, null, 2);
+        });
+
+        // Log form
+        document.getElementById("logForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const _id = formData.get("_id");
+            const query = new URLSearchParams(formData).toString();
+            const response = await fetch(`/api/users/${_id}/logs?${query}`);
+            const data = await response.json();
+            document.getElementById("logOutput").textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>

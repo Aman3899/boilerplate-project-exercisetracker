@@ -1,59 +1,84 @@
-* {
-  box-sizing: border-box;
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-body {
-  font-family:sans-serif;
-  margin: 25px;
-  color: #222;
-  background-color: #f5f5f5;
+.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 90%;
+  margin: 2rem;
 }
 
 h1 {
-  font-weight: bold;
-  
+  color: #1e3a8a;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-p {
-  max-width: 900px;
+h2 {
+  color: #1e3a8a;
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+section {
+  margin: 1rem 0;
 }
 
 form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: #87D37C;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #93c5fd;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
-input[type=submit] {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: #E4F1FE;
-  border: 1px solid grey;
-  box-shadow: 2px 2px #999;
+input[type="text"], input[type="number"], input[type="date"] {
+  width: 150px;
+}
+
+button {
+  padding: 8px 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-input[type=submit]:hover {
-  background-color: #FFFEC4;
+button:hover {
+  background: #1e40af;
 }
 
-code {
-  font-family: monospace;
-  font-size: 1.2em;
-  background-color: #FFFEC4;
-  padding: 2px;
+pre {
+  background: #f3f4f6;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: left;
+  overflow-x: auto;
+}
+
+p {
+  color: #4b5563;
 }
